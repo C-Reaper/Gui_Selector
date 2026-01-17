@@ -36,8 +36,8 @@ void Setup(AlxWindow* w){
         sizeof(unsigned int),
         37U,
         LIGHT_GRAY,
-        0.1f,0.1f,0.8f,0.8f,
-        0.25f,0.25f,
+        0.05f,0.05f,0.9f,0.9f,
+        0.2f,0.2f,
         (void(*)(void*,unsigned int*,int,int,float,float,float,float))Fn_Render
     );
 }
@@ -49,10 +49,11 @@ void Update(AlxWindow* w){
             GetMouse().y / (float)GetHeight()
         );
     }
-    if(Stroke(ALX_KEY_UP).PRESSED){
+    
+    if(Stroke(ALX_MOUSE_S_UP).PRESSED){
         Selector_Offset(&selector,-1);
     }
-    if(Stroke(ALX_KEY_DOWN).PRESSED){
+    if(Stroke(ALX_MOUSE_S_DOWN).PRESSED){
         Selector_Offset(&selector,1);
     }
     if(Stroke(ALX_KEY_TAB).PRESSED){
@@ -61,7 +62,7 @@ void Update(AlxWindow* w){
 
     Clear(WHITE);
 
-    Selector_Render(&selector,WINDOW_STD_ARGS);
+    Selector_Render(&selector,WINDOW_STD_ARGS,GetMouse().x / (float)GetWidth(),GetMouse().y / (float)GetHeight());
 
     if(scolor){
         CStr_RenderAlxFont(WINDOW_STD_ARGS,GetAlxFont(),"Selected",0.0f,0.0f,*scolor);
